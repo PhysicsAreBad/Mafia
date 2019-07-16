@@ -15,6 +15,7 @@ public class Lobby implements Listener{
 	private int playerCount = 0;
 	private int time = 15;
 	private boolean countdownEnable = true;
+	private boolean countdownActive = false;
 	private Location lobbySpawn;
 	
 	public Message pretty = new Message();
@@ -50,7 +51,10 @@ public class Lobby implements Listener{
 	public void onQuit(PlayerQuitEvent event) {
 		playerCount--;
 		Bukkit.broadcastMessage(pretty.prettyChat(event.getPlayer().getName() + " has left! " + playerCount + "/16 players in the server."));
-		stopTimer();
+		if (Bukkit.getOnlinePlayers().size() < 12 && countdownActive) {
+			stopTimer();
+			Bukkit.broadcastMessage(pretty.prettyChat("Countdown Stopped because there isn't enough players!"));
+		}
 	}
 	
 	private void initGame() {
@@ -66,6 +70,8 @@ public class Lobby implements Listener{
 			               control.startGame();
 			            }
 			        }.runTaskLater(plugin, 1);
+			        time = 15;
+			        plugin.getServer().setWhitelist(true);
 					stopTimer();				
 				} else {
 					Bukkit.broadcastMessage(pretty.prettyChat("Game starting in ") + time + " seconds"); 
