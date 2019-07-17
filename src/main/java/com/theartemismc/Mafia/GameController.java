@@ -10,6 +10,10 @@ import org.bukkit.potion.PotionEffectType;
 public class GameController {
 	private JavaPlugin plugin = null;
 	
+	public GameController() {
+		//Nothing
+	}
+	
 	public GameController(JavaPlugin plugin) {
 		this.plugin = plugin;
 	}

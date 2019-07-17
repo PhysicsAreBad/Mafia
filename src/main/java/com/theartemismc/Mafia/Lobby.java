@@ -19,14 +19,13 @@ public class Lobby implements Listener{
 	private Location lobbySpawn;
 	
 	public Message pretty = new Message();
-	public GameController control = null;
+	public GameController control = new GameController();
 	private JavaPlugin plugin;
 	
 	private int taskID;
 	
 	public Lobby(JavaPlugin plugin) {
 		this.plugin = plugin;
-		control = new GameController(plugin);
 		lobbySpawn.setX(plugin.getConfig().getDouble("lobby.x"));
 		lobbySpawn.setY(plugin.getConfig().getDouble("lobby.y"));
 		lobbySpawn.setZ(plugin.getConfig().getDouble("lobby.z"));
