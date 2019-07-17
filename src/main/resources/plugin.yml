@@ -1,3 +1,9 @@
 name: ArtemisMafia
 main: com.theartemismc.Mafia.Mafia
 version: 0.01
+commands:
+   mafiaadmin:
+      description: Admin command for Mafia
+      usage: /<command> 
+      permission: <plugin name>.admin
+      permission-message: You don't have <permission>
