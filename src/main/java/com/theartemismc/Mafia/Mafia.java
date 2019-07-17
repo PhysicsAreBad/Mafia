@@ -23,9 +23,9 @@ public class Mafia extends JavaPlugin {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("mafia help")) { // If the player typed /mafiaadmin then do the following, note: If you only registered this executor for one command, you don't need this
+		if (cmd.getName().equalsIgnoreCase("mafiaadmin")) { // If the player typed /mafiaadmin then do the following, note: If you only registered this executor for one command, you don't need this
 			if (args.length == 0){
-				sender.sendMessage(pretty.prettyChat("Mafia is a plugin based on town of salem, developed by PhysicsAreBad and Averageone23. To use this plugin, simply wait for at least 12 players to join. Once this has happened, the game will automatically start"));
+				sender.sendMessage(pretty.prettyChat("XD"));
 			} if (args.length == 2 && args[0].equalsIgnoreCase("setLocation")) {
 				if (args[1].equalsIgnoreCase("lobby")) {
 					if (sender instanceof Player) {
