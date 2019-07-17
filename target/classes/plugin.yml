@@ -5,5 +5,14 @@ commands:
    mafiaadmin:
       description: Admin command for Mafia
       usage: /<command> 
-      permission: <plugin name>.admin
-      permission-message: You don't have <permission>
+permissions:
+  mafia.*:
+    description: Permission to give access to all commands
+    children:
+      mafia.admin
+      mafia.start
+  mafia.admin:
+    description: Permission to give access set-up commands
+  mafia.start:
+    description: Permission to start/stop game
+    
