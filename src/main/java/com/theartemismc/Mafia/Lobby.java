@@ -40,7 +40,7 @@ public class Lobby implements Listener{
 			}
 	    	playerCount++;
 	    	Bukkit.broadcastMessage(pretty.prettyChat(event.getPlayer().getName() + " has joined! " + playerCount + "/16 players in the server."));
-	    	if (playerCount >= 12) {
+	    	if (playerCount == 12) {
 	    		initGame();
 	    	}
 		}
@@ -57,6 +57,7 @@ public class Lobby implements Listener{
 	}
 	
 	private void initGame() {
+		plugin.getServer().setWhitelist(true);
 		taskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
                public void run() {
@@ -70,7 +71,6 @@ public class Lobby implements Listener{
 			            }
 			        }.runTaskLater(plugin, 1);
 			        time = 15;
-			        plugin.getServer().setWhitelist(true);
 					stopTimer();				
 				} else {
 					Bukkit.broadcastMessage(pretty.prettyChat("Game starting in ") + time + " seconds"); 
@@ -81,6 +81,7 @@ public class Lobby implements Listener{
 	
 	public void stopTimer() {
         Bukkit.getScheduler().cancelTask(taskID);
+        plugin.getServer().setWhitelist(false);
     }
 	void toggleCountdown() {
 		countdownEnable = !countdownEnable;
