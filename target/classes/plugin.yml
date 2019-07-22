@@ -4,7 +4,13 @@ version: 0.01
 commands:
    mafiaadmin:
       description: Admin command for Mafia
-      usage: /<command> 
+      usage: /<command>
+   mafia:
+      description: Command for help and evil actions in mafia
+      usage: /<command>
+   town:
+      description: Command for town actions in mafia
+      usage: /<command>
 permissions:
   mafia.*:
     description: Permission to give access to all commands

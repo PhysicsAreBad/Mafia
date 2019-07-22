@@ -16,7 +16,7 @@ public class GameController {
 	
 	private JavaPlugin plugin = null;
 	
-	private HashMap<Player, String> roles = new HashMap<>();
+	HashMap<Player, String> roles = new HashMap<>();
 	private HashMap<String, Player> mafia = new HashMap<>();
 	private String[] roleList = {"Lookout", "Investigator", "Jailor", "RT", "Doctor", "Jester", "Mafiaso", "Godfather", "Vigilante", "Consigliere", "Serial", "Veteran"};
 	private String[] townRoles = {"Lookout", "Investigator", "Doctor", "Mayor", "Vigilante", "Bodyguard"};
@@ -25,6 +25,10 @@ public class GameController {
 	
 	private boolean day = false;
 	private int dayNum = 0;
+	
+	HashMap<Player, String> dead = new HashMap<>();
+	HashMap<Player, String> grave = new HashMap<>();
+	HashMap<Player, String> save = new HashMap<>();
 	
 	public GameController() {
 		//Nothing
@@ -90,7 +94,7 @@ public class GameController {
 			Location exe = new Location(player.getWorld(), plugin.getConfig().getDouble("execution.x"), plugin.getConfig().getDouble("execution.y"), plugin.getConfig().getDouble("execution.z"));
 			player.teleport(exe);
 		}
-		Bukkit.broadcastMessage(pretty.prettyChat(""));
+		Bukkit.broadcastMessage(pretty.prettyChat("Welcome to Mafia! Your goal is to help your team win. If you are town, you want to rid the town of the evil mafia and insane Serial Killer.\nIf yo"));
 	}
 	
 	public void dayCycle() {

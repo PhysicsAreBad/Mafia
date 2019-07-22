@@ -1,5 +1,7 @@
 package com.theartemismc.Mafia;
 
+import java.util.HashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Mafia extends JavaPlugin {
 	Message pretty = new Message();
 	GameController control = null;
+	TownCommands town = new TownCommands();
 	
 	@Override
     public void onEnable() {
@@ -68,6 +71,53 @@ public class Mafia extends JavaPlugin {
 				} else {
 					sender.sendMessage(pretty.prettyChat("You don't have permission to do that!"));
 				}
+			}
+			return true;
+		} else if (cmd.getName().equalsIgnoreCase("mafia")) {
+			return true;
+		} else if (cmd.getName().equalsIgnoreCase("town")) {
+			if (args.length == 0) {
+				sender.sendMessage(pretty.prettyChat("Not enough arguments! Do /mafia to see the commands for your role."));
+			} else if (!(sender instanceof Player)) {
+				sender.sendMessage(pretty.prettyChat("You must be a player to use this command."));
+			} else if (args.length == 2 && args[0].equalsIgnoreCase("guard")) {
+				Player player = (Player) sender;
+				if (!(control.roles.get(player) == "Bodyguard")) {
+					sender.sendMessage(pretty.prettyChat("You must be the bodyguard to use this command."));
+					return true;
+				} else if (control.grave.containsKey(player)) {
+					sender.sendMessage(pretty.prettyChat("You must be alive to use this command."));
+					return true;
+				}
+				Player protect = Bukkit.getPlayer(args[1]);
+				if (!protect.isOnline()) {
+					sender.sendMessage(pretty.prettyChat("Player must be online to use this command."));
+					return true;
+				} else if (control.grave.containsKey(protect)) {
+					sender.sendMessage(pretty.prettyChat("Player must be alive to use this command."));
+					return true;
+				}
+				HashMap<Player, String> save = town.Bodyguard(control.save, protect);
+				control.save = save;	 
+			} else if (args.length == 2 && args[0].equalsIgnoreCase("investigate")) {
+				Player player = (Player) sender;
+				if (!(control.roles.get(player) == "Investigator")) {
+					sender.sendMessage(pretty.prettyChat("You must be the investigator to use this command."));
+					return true;
+				} else if (control.grave.containsKey(player)) {
+					sender.sendMessage(pretty.prettyChat("You must be alive to use this command."));
+					return true;
+				}
+				Player protect = Bukkit.getPlayer(args[1]);
+				if (!protect.isOnline()) {
+					sender.sendMessage(pretty.prettyChat("Player must be online to use this command."));
+					return true;
+				} else if (control.grave.containsKey(protect)) {
+					sender.sendMessage(pretty.prettyChat("Player must be alive to use this command."));
+					return true;
+				}
+				String message = town.Investigator(control.roles, protect);
+				sender.sendMessage(pretty.prettyChat(message));
 			}
 			return true;
 		}
